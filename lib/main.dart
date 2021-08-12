@@ -1,12 +1,10 @@
-import 'package:film_fluent/feature/movie_list/data/data_sources/movie_list_remote_data_source.dart';
-import 'package:film_fluent/feature/movie_list/data/data_sources/movie_list_remote_data_source_impl.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hive/hive.dart';
-import 'package:mockito/annotations.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+
 import 'core/di/service_locator.dart' as di;
 import 'core/utils/app_themes.dart';
 import 'feature/home_page_route.dart';

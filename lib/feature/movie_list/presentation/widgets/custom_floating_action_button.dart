@@ -3,7 +3,6 @@ import 'package:film_fluent/core/utils/app_colors.dart';
 import 'package:film_fluent/core/utils/text_themes.dart';
 import 'package:film_fluent/feature/movie_list/data/models/movie_filter_model.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class CustomFloatingActionButton extends StatelessWidget {
   final Function(int) onItemClick;

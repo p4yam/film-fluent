@@ -115,7 +115,7 @@ class Results {
     _originalLanguage = json['original_language'];
     _originalTitle = json['original_title'];
     _overview = json['overview'];
-    _popularity = json['popularity'];
+    _popularity = double.tryParse(json['popularity'].toString());
     _posterPath = json['poster_path'];
     _releaseDate = json['release_date'];
     _title = json['title'];

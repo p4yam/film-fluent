@@ -14,25 +14,34 @@ class MovieListController extends GetxController{
   var state = StateEnum.initial;
   var sortBy = MovieFilterModel.sampleList[0];
   var _currentPage = 1;
+  var errorMessage ='';
 
   @override
   void onInit() {
-    fetchData();
+    fetchData(false,true);
     super.onInit();
   }
 
-  void fetchData()async{
-    state = StateEnum.loading;
+  void fetchData(bool loadMore, bool refreshFilter)async{
+    state = loadMore?StateEnum.loadMore :StateEnum.loading;
+    if(refreshFilter) {
+      _currentPage = 1;
+      movieList.clear();
+      currentModel=null;
+    }
     update();
     final result = await repository.fetchMovies({'api_key':AppKeys.ApiKey,'include_adult':'false','sort_by':sortBy.slug,'page':_currentPage});
     result.fold((l){
-      print('p4yam: ${l.message}');
+      state=StateEnum.error;
+      errorMessage=l.message;
+      update();
     }, (r){
       state=StateEnum.success;
       currentModel= r;
-      movieList= r.results;
+      movieList.addAll(r.results);
+      _currentPage+=1;
+
       update();
-      print('p4yam: success ${r.results.length}');
     });
   }
 }
