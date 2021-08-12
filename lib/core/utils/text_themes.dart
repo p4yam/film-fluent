@@ -24,6 +24,7 @@ class TextThemes{
     fontSize: 20
   );
 
+
   static final whiteBold15 = GoogleFonts.raleway(
       color: AppColor.White,
       fontWeight: FontWeight.bold,
@@ -64,9 +65,8 @@ class TextThemes{
       fontSize: 16
   );
 
-  static final blackNormal = GoogleFonts.raleway(
+  static final blackNormal17 = GoogleFonts.raleway(
       color: AppColor.GrayDarker,
       fontSize: 17,
-    fontWeight: FontWeight.bold
   );
 }

@@ -120,7 +120,7 @@ class Results {
     _releaseDate = json['release_date'];
     _title = json['title'];
     _video = json['video'];
-    _voteAverage = json['vote_average'];
+    _voteAverage = double.tryParse(json['vote_average'].toString());
     _voteCount = json['vote_count'];
   }
 

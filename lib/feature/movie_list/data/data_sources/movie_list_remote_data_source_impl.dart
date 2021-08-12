@@ -10,7 +10,7 @@ class MovieListRemoteDataSourceImpl extends MovieListRemoteDataSource{
 
   @override
   Future<Response> fetchMovies(Map<String, dynamic> query) async{
-    return apiTools.getRequest(baseUrl, apiPath, query);
+    return await apiTools.getRequest(baseUrl, apiPath, query);
   }
 
 }
