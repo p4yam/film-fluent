@@ -26,6 +26,9 @@ class MovieListItem extends StatelessWidget {
               width: Get.width,
               height: 300,
               fit: BoxFit.cover,
+                errorBuilder: (_,f,errMessage){
+                  return Center();
+                }
             ),
           ),
           Align(
@@ -39,6 +42,9 @@ class MovieListItem extends StatelessWidget {
                   child: Image.network(
                     '${AppKeys.imageBaseUrl}${result.posterPath}',
                     fit: BoxFit.cover,
+                    errorBuilder: (_,f,errMessage){
+                      return Image.asset('assets/images/404.png',width: 64,height: 64,);
+                    },
                   )),
             ),
           ),

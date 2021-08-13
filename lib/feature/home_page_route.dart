@@ -23,7 +23,6 @@ class _HomePageRouteState extends State<HomePageRoute> {
         children: [
           MovieListPageRoute(),
           Container(),
-          Container(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -35,7 +34,6 @@ class _HomePageRouteState extends State<HomePageRoute> {
         },
         currentIndex: _currentPage,
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home_outlined),label: AppConstraints.NavBarHome),
           BottomNavigationBarItem(icon: Icon(Icons.search),label: AppConstraints.NavBarSearch),
           BottomNavigationBarItem(icon: Icon(Icons.bookmark),label: AppConstraints.NavBarFavorite),
         ],

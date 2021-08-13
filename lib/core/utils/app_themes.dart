@@ -12,6 +12,9 @@ class AppThemes {
       brightness: Brightness.light,
       backgroundColor: AppColor.BG,
       scaffoldBackgroundColor: AppColor.BG,
+      inputDecorationTheme: InputDecorationTheme(
+        border: InputBorder.none
+      ),
       textTheme: GoogleFonts.ralewayTextTheme(),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: AppColor.White,

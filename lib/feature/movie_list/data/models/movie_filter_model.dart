@@ -9,7 +9,7 @@ class MovieFilterModel{
     MovieFilterModel('popularity.asc', 'Least Popular'),
     MovieFilterModel('release_date.desc', 'Newest Movies'),
     MovieFilterModel('release_date.asc', 'Oldest Movies'),
-    MovieFilterModel('vote_count.desc', 'Highest Votes'),
-    MovieFilterModel('vote_count.asc', 'Lowest Votes'),
+    MovieFilterModel('vote_count.desc', 'Highest Vote Count'),
+    MovieFilterModel('vote_count.asc', 'Lowest Vote Count'),
   ];
 }
