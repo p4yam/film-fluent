@@ -2,11 +2,12 @@ import 'package:film_fluent/core/constraints/app_constraints.dart';
 import 'package:film_fluent/core/constraints/state_enum.dart';
 import 'package:film_fluent/core/utils/app_colors.dart';
 import 'package:film_fluent/core/widgets/error_widget.dart';
+import 'package:film_fluent/feature/movie_detail/presentation/pages/movie_detail_page_route.dart';
 import 'package:film_fluent/feature/movie_list/data/models/movie_filter_model.dart';
 import 'package:film_fluent/feature/movie_list/presentation/manager/movie_list_controller.dart';
 import 'package:film_fluent/feature/movie_list/presentation/widgets/custom_floating_action_button.dart';
 import 'package:film_fluent/feature/movie_list/presentation/widgets/custom_search_appbar.dart';
-import 'package:film_fluent/feature/movie_list/presentation/widgets/movie_list_item.dart';
+import 'package:film_fluent/core/widgets/movie_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -51,8 +52,6 @@ class _MovieListPageRouteState extends State<MovieListPageRoute>
                   onItemClick: (index) {
 
                     controller.sortMovies(MovieFilterModel.sampleList[index]);
-/*                    controller.sortBy = MovieFilterModel.sampleList[index];
-                    controller.fetchData(false, true);*/
                   },
                   filterList: MovieFilterModel.sampleList,
                 )
@@ -114,9 +113,14 @@ class _MovieListPageRouteState extends State<MovieListPageRoute>
             child: ListView.builder(
               itemCount: results.length,
               itemBuilder: (_, index) {
-                return MovieListItem(
-                  result: results[index],
-                  onClick: () {},
+                return Hero(
+                  tag: results[index].id,
+                  child: MovieListItem(
+                    result: results[index],
+                    onClick: () {
+                      Get.to(()=>MovieDetailPageRoute(movieItem: results[index],));
+                    },
+                  ),
                 );
               },
             ),

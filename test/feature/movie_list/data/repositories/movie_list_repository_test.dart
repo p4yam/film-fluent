@@ -7,13 +7,13 @@ import 'package:get/get_connect/http/src/exceptions/exceptions.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import 'movie_list_data_source_test.mocks.dart';
+import 'movie_list_repository_test.mocks.dart';
 
 @GenerateMocks([MovieListRemoteDataSourceImpl])
 void main() {
   group('movie_list domain', () {
-    /// Either keyword would return Right(Answer) if the operation is a success
-    test('returns Right side if the operation is a successful', () async {
+    /// Either keyword would return [Right(Answer)] if the operation is a success
+    test('returns Right side if search operation is a succcess', () async {
       //Arrange
       final mockDataSource = MockMovieListRemoteDataSourceImpl();
       final sut = MovieListRepositoryImpl(remoteDataSource: mockDataSource);
@@ -43,8 +43,8 @@ void main() {
       expect(movieId, sampleId);
     });
 
-    /// Either keyword would return Left(ErrorModel) if the operation is a Failure
-    test('returns Left side if the operation is a failure', () async {
+    /// Either keyword would return [Left(ErrorModel)] if the operation is a Failure
+    test('returns Left side if search is a failure', () async {
       //Arrange
       final mockDataSource = MockMovieListRemoteDataSourceImpl();
       final sut = MovieListRepositoryImpl(remoteDataSource: mockDataSource);

@@ -57,9 +57,12 @@ class MovieListController extends GetxController {
 
 
   /// Sorting previously filled [_movieList]
-  void sortMovies(MovieFilterModel sortType) {
+  /// Some movies may have blank Release Date, so instead of showing
+  /// an error, this method will return the previous data.
+  void sortMovies(MovieFilterModel sortType) async{
     state = StateEnum.loading;
     update();
+    await Future.delayed(Duration(seconds: 1));
     switch (sortType.slug) {
       case 'popularity.desc':
         _movieList.sort((a, b) => b.popularity.compareTo(a.popularity));

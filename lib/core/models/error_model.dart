@@ -1,5 +1,5 @@
 
-class ErrorModel{
+class ErrorModel implements Exception{
   final int id;
   final String message;
 

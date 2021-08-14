@@ -16,7 +16,7 @@ class MovieListRepositoryImpl extends MovieListRepository{
       final req = await remoteDataSource.fetchMovies(query);
       return Right(MovieListModel.fromJson(req.body));
     }catch(ex){
-      return Left(ErrorModel(message:ex.message.toString(),id: -1));
+      return Left(ErrorModel(message:ex.toString(),id: -1));
     }
   }
 

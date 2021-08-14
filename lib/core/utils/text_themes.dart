@@ -21,6 +21,8 @@ class TextThemes{
 
   static final whiteNormal20 = GoogleFonts.raleway(
       color: AppColor.White,
+    fontWeight: FontWeight.normal,
+    decoration: TextDecoration.none,
     fontSize: 20
   );
 
