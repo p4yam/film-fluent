@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:film_fluent/core/constraints/app_constraints.dart';
 import 'package:film_fluent/core/models/error_model.dart';
 import 'package:film_fluent/core/widgets/error_widget.dart';
 import 'package:film_fluent/feature/movie_detail/data/data_sources/movie_detail_local_data_source.dart';
@@ -21,7 +22,9 @@ class MovieDetailRepositoryImpl extends MovieDetailRepository {
       Map<String, dynamic> query, int movieId) async {
     try {
       final result = await remoteDataSource.fetchMovies(query, movieId);
-      return Right(MovieDetailModel.fromJson(result.body));
+      if(result!=null)
+        return Right(MovieDetailModel.fromJson(result.body));
+      return Left(ErrorModel(message: AppConstraints.NullDataError,id: -1));
     } catch (ex) {
       return Left(ErrorModel(message: ex.toString(), id: -1));
     }
@@ -33,7 +36,9 @@ class MovieDetailRepositoryImpl extends MovieDetailRepository {
   Future<Either<ErrorModel, bool>> getMovieFavoriteStatus(int movieId) async {
     try {
       final result = await localDataSource.getMovieFavoriteStatus(movieId);
-      return Right(result);
+      if(result!=null)
+        return Right(result);
+      return Right(false);
     } catch (ex) {
       return Right(false);
     }
@@ -44,7 +49,9 @@ class MovieDetailRepositoryImpl extends MovieDetailRepository {
       Movie movieModel) async {
     try {
       final result = await localDataSource.addRemoveMovieToDatabase(movieModel);
-      return Right(result);
+      if(result!=null)
+        return Right(result);
+      return Left(ErrorModel(message: AppConstraints.ErrorFavoriteAdd,id: -1));
     } catch (ex) {
       return Left(ErrorModel(message: ex.toString()));
     }

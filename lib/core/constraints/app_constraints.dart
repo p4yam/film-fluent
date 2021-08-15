@@ -18,6 +18,7 @@ class AppConstraints{
   static const ImdbId = 'IMDB id';
   static const ProductionCountries = 'Production Countries';
   static const ErrorFavoriteAdd = 'Error Adding/Removing movie to favorites';
+  static const NullDataError = 'Data cant be null';
   static const MovieGenre = [
       {
         "id": 28,

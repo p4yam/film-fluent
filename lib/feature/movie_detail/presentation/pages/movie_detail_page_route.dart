@@ -137,7 +137,10 @@ class _MovieDetailPageRouteState extends State<MovieDetailPageRoute> {
   }
 
   void _showErrorMessage(String message){
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message),backgroundColor: AppColor.RedAccent,));
+    WidgetsBinding.instance.addPostFrameCallback((_){
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message),backgroundColor: AppColor.RedAccent,));
+    });
+
   }
 
   void _showFavoriteSnackbar(MovieDetailController controller){

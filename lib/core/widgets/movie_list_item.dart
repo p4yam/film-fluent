@@ -29,7 +29,7 @@ class MovieListItem extends StatelessWidget {
                 height: 300,
                 fit: BoxFit.cover,
                   errorBuilder: (_,f,errMessage){
-                    return Center();
+                    return Container(height: 300,width: Get.width,color: AppColor.GrayLight,);
                   }
               ),
             ),
@@ -43,6 +43,10 @@ class MovieListItem extends StatelessWidget {
                         Border.all(color: AppColor.GrayDarker)),
                     child: Image.network(
                       '${AppKeys.ImageBaseUrl}${result.posterPath}',
+                      loadingBuilder:(_,child,loadingProgress){
+                        if (loadingProgress == null) return child;
+                        return Center(child: CircularProgressIndicator(color: AppColor.GrayLight,),);
+                      } ,
                       fit: BoxFit.cover,
                       errorBuilder: (_,f,errMessage){
                         return Image.asset('assets/images/404.png',width: 64,height: 64,);

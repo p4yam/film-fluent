@@ -7,8 +7,8 @@ import 'package:hive/hive.dart';
 class FavoriteListLocalDataSourceImpl extends FavoriteListLocalDataSource{
 
   @override
-  Future<List<Movie>> fetchMoviesFromDB() async{
+  Future<Iterable<dynamic>> fetchMoviesFromDB() async{
     final hiveBox = await Hive.openBox(AppKeys.HiveBoxName);
-    return hiveBox.values.map((e) => Movie.fromJson(e)).toList();
+    return hiveBox.values;
   }
 }
