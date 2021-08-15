@@ -2,11 +2,10 @@ import 'package:film_fluent/core/constraints/app_keys.dart';
 import 'package:film_fluent/core/constraints/state_enum.dart';
 import 'package:film_fluent/feature/movie_detail/data/models/movie_detail_model.dart';
 import 'package:film_fluent/feature/movie_detail/domain/repositories/movie_detail_repository.dart';
+import 'package:film_fluent/feature/movie_list/data/models/movie_list_model.dart';
 import 'package:get/get.dart';
 import 'package:film_fluent/core/di/service_locator.dart' as di;
-import 'dart:developer' as developer;
 
-import 'package:hive/hive.dart';
 
 class MovieDetailController extends GetxController {
   /// injecting dependencies instead of creating multiple new items
@@ -17,7 +16,6 @@ class MovieDetailController extends GetxController {
   var movieFavoriteStatus=false;
   String get errorMessage => _errorMessage;
   MovieDetailModel _movieDetailModel;
-  Box _box;
   MovieDetailModel get movieDetailModel => _movieDetailModel;
   var state = StateEnum.initial;
 
@@ -30,12 +28,11 @@ class MovieDetailController extends GetxController {
     result.fold((l) {
       state = StateEnum.error;
       _errorMessage = l.message;
-      update();
     }, (r) {
       state = StateEnum.success;
       _movieDetailModel = r;
-      update();
     });
+    update();
   }
 
   void getMovieFavoriteStatus(int movieId)async{
@@ -43,5 +40,16 @@ class MovieDetailController extends GetxController {
     result.fold((l) => movieFavoriteStatus=false, (r) => movieFavoriteStatus=r);
     update();
 
+  }
+
+  void addRemoveMovieToFavorites(Movie movie)async{
+    final result = await repository.addRemoveMovieToDatabase(movie);
+    result.fold((l) {
+      state = StateEnum.error;
+      _errorMessage = l.message;
+    }, (r) {
+      movieFavoriteStatus=r;
+    });
+    update();
   }
 }

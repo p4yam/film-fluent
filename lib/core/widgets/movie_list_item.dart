@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MovieListItem extends StatelessWidget {
-  final Results result;
+  final Movie result;
   final VoidCallback onClick;
 
   const MovieListItem({Key key, this.result, this.onClick}) : super(key: key);

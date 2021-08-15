@@ -8,7 +8,7 @@ import 'movie_detail_local_data_source.dart';
 class MovieDetailLocalDataSourceImpl extends MovieDetailLocalDataSource{
 
   @override
-  Future<bool> addRemoveMovieToDatabase(Results movieModel) async{
+  Future<bool> addRemoveMovieToDatabase(Movie movieModel) async{
     final hiveBox = await Hive.openBox(AppKeys.HiveBoxName);
     if(hiveBox.containsKey(movieModel.id)){
       hiveBox.delete(movieModel.id);

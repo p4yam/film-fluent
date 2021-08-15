@@ -85,7 +85,7 @@ void main() {
     test('returns Right(true)/Right(false) for adding/removing movie to database',()async {
       when(mockLocalDatasource.addRemoveMovieToDatabase(any)).thenAnswer((realInvocation) async=> true);
 
-      final fav =await sut.addRemoveMovieToDatabase(Results(id: 0));
+      final fav =await sut.addRemoveMovieToDatabase(Movie(id: 0));
 
       expect(fav,isA<Right>());
     });
@@ -93,7 +93,7 @@ void main() {
     test('returns Left(ErrorModel) if an error occurs while adding/removing movie to database',()async {
       when(mockLocalDatasource.addRemoveMovieToDatabase(any)).thenThrow(Exception('error'));
 
-      final fav =await sut.addRemoveMovieToDatabase(Results(id: 0));
+      final fav =await sut.addRemoveMovieToDatabase(Movie(id: 0));
       var error;
       fav.fold((l) => error=l, (r) => null);
       expect(fav,isA<Left>());

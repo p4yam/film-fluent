@@ -13,9 +13,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MovieDetailPageRoute extends StatefulWidget {
-  final Results movieItem;
-
-  MovieDetailPageRoute({Key key, this.movieItem}) : super(key: key);
+  final Movie movieItem;
+  final String heroTag;
+  MovieDetailPageRoute({Key key,@required this.movieItem, this.heroTag}) : super(key: key);
 
   @override
   _MovieDetailPageRouteState createState() => _MovieDetailPageRouteState();
@@ -41,6 +41,8 @@ class _MovieDetailPageRouteState extends State<MovieDetailPageRoute> {
     return GetBuilder<MovieDetailController>(
       init: _movieDetailController,
       builder: (controller) {
+        if(controller.state==StateEnum.error)
+          _showErrorMessage(controller.errorMessage);
         return Scaffold(
           appBar: AppBar(
             title: Text(
@@ -49,7 +51,9 @@ class _MovieDetailPageRouteState extends State<MovieDetailPageRoute> {
               overflow: TextOverflow.fade,
             ),
             actions: [
-              IconButton(onPressed: () {}, icon: Icon(controller.movieFavoriteStatus?Icons.favorite:Icons.favorite_border))
+              IconButton(onPressed: () {
+                controller.addRemoveMovieToFavorites(widget.movieItem);
+              }, icon: Icon(controller.movieFavoriteStatus?Icons.favorite:Icons.favorite_border))
             ],
           ),
           body: NotificationListener<ScrollNotification>(
@@ -58,20 +62,14 @@ class _MovieDetailPageRouteState extends State<MovieDetailPageRoute> {
                   scrollInfo.metrics.pixels ==
                       scrollInfo.metrics.maxScrollExtent && _firstTime && !controller.movieFavoriteStatus) {
                 _firstTime=false;
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Row(
-                  children: [
-                    Text('Add this movie to favorites?'),
-                    Spacer(),
-                    TextButton(onPressed: (){}, child: Text('Yes'))
-                  ],
-                ),backgroundColor: AppColor.Green,),);
+                _showFavoriteSnackbar(controller);
               }
               return true;
             },
             child: ListView(
               children: [
                 Hero(
-                  tag: widget.movieItem.id,
+                  tag: widget.heroTag,
                   child: MovieListItem(
                     onClick: () {},
                     result: widget.movieItem,
@@ -136,6 +134,23 @@ class _MovieDetailPageRouteState extends State<MovieDetailPageRoute> {
                         ),
                       )),
                 )));
+  }
+
+  void _showErrorMessage(String message){
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message),backgroundColor: AppColor.RedAccent,));
+  }
+
+  void _showFavoriteSnackbar(MovieDetailController controller){
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Row(
+      children: [
+        Text('Add this movie to favorites?'),
+        Spacer(),
+        TextButton(onPressed: (){
+          controller.addRemoveMovieToFavorites(widget.movieItem);
+          ScaffoldMessenger.of(context).hideCurrentSnackBar();
+        }, child: Text('Yes'))
+      ],
+    ),backgroundColor: AppColor.Green,),);
   }
 
   Widget _buildMoreInfo(MovieDetailModel model) {

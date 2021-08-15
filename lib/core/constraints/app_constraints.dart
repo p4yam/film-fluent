@@ -9,6 +9,7 @@ class AppConstraints{
   static const EmptySearch = 'There is nothing here!';
   static const EmptySearchQueryError = 'Search input is empty';
   static const NothingFound = 'Nothing found!';
+  static const FavListEmpty = 'Your favorite list is empty!';
   static const FindMoreButton = 'Find More';
   static const ReleaseDateLabel = 'Release date';
   static const StatusLabel = 'Status';

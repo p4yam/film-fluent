@@ -9,5 +9,5 @@ abstract class MovieDetailRepository {
 
   Future<Either<ErrorModel,bool>> getMovieFavoriteStatus(int movieId);
 
-  Future<Either<ErrorModel,bool>> addRemoveMovieToDatabase(Results movieModel);
+  Future<Either<ErrorModel,bool>> addRemoveMovieToDatabase(Movie movieModel);
 }

@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:film_fluent/core/constraints/app_constraints.dart';
 import 'package:film_fluent/core/models/error_model.dart';
 import 'package:film_fluent/core/widgets/error_widget.dart';
 import 'package:film_fluent/feature/movie_detail/data/data_sources/movie_detail_local_data_source.dart';
@@ -9,8 +8,6 @@ import 'package:film_fluent/feature/movie_detail/domain/repositories/movie_detai
 import 'package:film_fluent/feature/movie_list/data/models/movie_list_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'dart:developer' as developer;
-
 
 class MovieDetailRepositoryImpl extends MovieDetailRepository {
   final MovieDetailRemoteDataSource remoteDataSource;
@@ -35,21 +32,20 @@ class MovieDetailRepositoryImpl extends MovieDetailRepository {
   @override
   Future<Either<ErrorModel, bool>> getMovieFavoriteStatus(int movieId) async {
     try {
-    final result = await localDataSource.getMovieFavoriteStatus(movieId);
-    return Right(result);
-  }catch(ex){
-      developer.log('p4yam: $ex');
+      final result = await localDataSource.getMovieFavoriteStatus(movieId);
+      return Right(result);
+    } catch (ex) {
       return Right(false);
     }
   }
 
   @override
-  Future<Either<ErrorModel, bool>> addRemoveMovieToDatabase(Results movieModel) async{
+  Future<Either<ErrorModel, bool>> addRemoveMovieToDatabase(
+      Movie movieModel) async {
     try {
       final result = await localDataSource.addRemoveMovieToDatabase(movieModel);
       return Right(result);
-    }catch(ex){
-      developer.log('p4yam: $ex');
+    } catch (ex) {
       return Left(ErrorModel(message: ex.toString()));
     }
   }

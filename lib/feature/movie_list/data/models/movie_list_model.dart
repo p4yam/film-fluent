@@ -1,23 +1,23 @@
 class MovieListModel {
   int _page;
-  List<Results> _results;
+  List<Movie> _results;
   int _totalPages;
-  int _totalResults;
+  int _totalMovie;
 
   int get page => _page;
-  List<Results> get results => _results;
+  List<Movie> get results => _results;
   int get totalPages => _totalPages;
-  int get totalResults => _totalResults;
+  int get totalMovie => _totalMovie;
 
   MovieListModel({
       int page, 
-      List<Results> results, 
+      List<Movie> results,
       int totalPages, 
-      int totalResults}){
+      int totalMovie}){
     _page = page;
     _results = results;
     _totalPages = totalPages;
-    _totalResults = totalResults;
+    _totalMovie = totalMovie;
 }
 
   MovieListModel.fromJson(dynamic json) {
@@ -25,11 +25,11 @@ class MovieListModel {
     if (json['results'] != null) {
       _results = [];
       json['results'].forEach((v) {
-        _results.add(Results.fromJson(v));
+        _results.add(Movie.fromJson(v));
       });
     }
     _totalPages = json['total_pages'];
-    _totalResults = json['total_results'];
+    _totalMovie = json['total_results'];
   }
 
   Map<String, dynamic> toJson() {
@@ -39,13 +39,13 @@ class MovieListModel {
       map['results'] = _results.map((v) => v.toJson()).toList();
     }
     map['total_pages'] = _totalPages;
-    map['total_results'] = _totalResults;
+    map['total_results'] = _totalMovie;
     return map;
   }
 
 }
 
-class Results {
+class Movie {
   bool _adult;
   String _backdropPath;
   List<int> _genreIds;
@@ -76,7 +76,7 @@ class Results {
   double get voteAverage => _voteAverage;
   int get voteCount => _voteCount;
 
-  Results({
+  Movie({
       bool adult, 
       String backdropPath, 
       List<int> genreIds, 
@@ -107,7 +107,7 @@ class Results {
     _voteCount = voteCount;
 }
 
-  Results.fromJson(dynamic json) {
+  Movie.fromJson(dynamic json) {
     _adult = json['adult'];
     _backdropPath = json['backdrop_path'];
     _genreIds = json['genre_ids'] != null ? json['genre_ids'].cast<int>() : [];

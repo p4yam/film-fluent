@@ -12,14 +12,15 @@ class MovieListController extends GetxController {
   /// so I used [get_it] package alongside
   final repository = di.getIt<MovieListRepository>();
 
-  List<Results> _movieList = [];
-  List<Results> get movieList => _movieList;
+  List<Movie> _movieList = [];
+  List<Movie> get movieList => _movieList;
   MovieListModel currentModel;
   var state = StateEnum.initial;
   var _currentPage = 1;
-  var _errorMessage = '';
 
+  var _errorMessage = '';
   String get errorMessage => _errorMessage;
+
   var searchString = '';
 
   /// fetching data from server, the input values are:

@@ -114,11 +114,11 @@ class _MovieListPageRouteState extends State<MovieListPageRoute>
               itemCount: results.length,
               itemBuilder: (_, index) {
                 return Hero(
-                  tag: results[index].id,
+                  tag: 's${results[index].id}',
                   child: MovieListItem(
                     result: results[index],
                     onClick: () {
-                      Get.to(()=>MovieDetailPageRoute(movieItem: results[index],));
+                      Get.to(()=>MovieDetailPageRoute(movieItem: results[index],heroTag: 's${results[index].id}',));
                     },
                   ),
                 );

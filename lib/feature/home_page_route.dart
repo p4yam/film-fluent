@@ -1,4 +1,5 @@
 import 'package:film_fluent/core/constraints/app_constraints.dart';
+import 'package:film_fluent/feature/favorite_list/presentation/pages/favorite_list_page_route.dart';
 import 'package:flutter/material.dart';
 
 import 'movie_list/presentation/pages/movie_list_page_route.dart';
@@ -22,7 +23,7 @@ class _HomePageRouteState extends State<HomePageRoute> {
         physics: NeverScrollableScrollPhysics(),
         children: [
           MovieListPageRoute(),
-          Container(),
+         FavoriteListPageRoute()
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
